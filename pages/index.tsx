@@ -1,39 +1,36 @@
+import { useUser } from "@auth0/nextjs-auth0";
+
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import Button from "../components/Button";
 import Layout from "../components/Layout";
 import ProfileCard from "../components/ProfileCard";
 
 import styles from "../styles/Home.module.css";
-import { UserType } from "./api/user";
 
 const Home: NextPage = () => {
-  const [data, setData] = useState<UserType>();
-  const [isLoading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      fetch("api/user")
-        .then((res) => res.json())
-        .then((data) => {
-          setData(data);
-          setLoading(false);
-        });
-    }, 1000);
-  }, []);
+  const { user, error, isLoading } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error?.message}</div>;
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Profile</title>
+        <title>{user ? "Profile" : "Log in"}</title>
         <meta name="profile" content="Profile page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Layout>
         <main className={styles.main}>
-          <h1 className={styles.title}>Profile</h1>
-          <ProfileCard user={data} />
+          <h1 className={styles.title}>{user ? "Profile" : "Log in"}</h1>
+          {user ? (
+            <ProfileCard user={user} />
+          ) : (
+            <Button variant="contained" href="api/auth/login">
+              Log in
+            </Button>
+          )}
         </main>
       </Layout>
     </div>

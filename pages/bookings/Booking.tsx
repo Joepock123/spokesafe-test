@@ -1,3 +1,5 @@
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+
 import type { NextPage } from "next";
 import Head from "next/head";
 import Button from "../../components/Button";
@@ -5,7 +7,7 @@ import Layout from "../../components/Layout";
 
 import styles from "../../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const Booking: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,4 +25,6 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Booking;
+
+export const getServerSideProps = withPageAuthRequired();

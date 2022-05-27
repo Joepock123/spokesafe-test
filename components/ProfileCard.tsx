@@ -3,14 +3,15 @@ import { UserType } from "../pages/api/user";
 import styles from "../styles/Home.module.css";
 
 const ProfileCard = ({ user }: { user?: UserType }) => {
-  const { firstName, lastName, avatarLink, balance } = user || {};
+  const { firstName, lastName, picture, balance } = user || {};
+  console.log("~ picture", picture);
   return (
     <div className={styles.container}>
       {!!user ? (
         <>
           <Image
             priority
-            src={avatarLink}
+            src={picture}
             height={144}
             width={144}
             alt={`${firstName} ${lastName}`}
