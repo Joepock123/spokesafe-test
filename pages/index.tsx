@@ -5,7 +5,6 @@ import Head from "next/head";
 import Button from "../components/Button";
 import Layout from "../components/Layout";
 import ProfileCard from "../components/ProfileCard";
-
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
