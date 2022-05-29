@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spokesafe Tech Test
 
-## Getting Started
+- [Website link](https://spokesafe-test.vercel.app/)
+- [Front-end repo](https://github.com/Joepock123/spokesafe-test)
+- [Back-end repo](https://github.com/Joepock123/spokesafe-server)
 
-First, run the development server:
+## User Stories - Project A
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- As a user I want to be able to cancel my booking and obtain credits to use at a later date.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Acceptability criteria
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [x] The user has secure access to their account
+- [x] When the booking is cancelled the credits are added to the user's balance.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Requirements
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [x] Web app: Next.js deployed on Vercel
+- [x] REST endpoint: GET and PUT endpoints on Express server hosted on Heroku
+- [x] Postgres database hosted on Heroku
+- [x] Promises/async functions
+- [x] Readme
+- [x] Secure access: OAuth login and authentication using `@auth0/nextjs-auth0` package
+- [ ] Test
 
-## Learn More
+### Further information
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] Styled using Styled Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Challenges
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Meeting the requirements in 3 hours. Setting up the infrastructure consumed 3 hours alone due to difficulties using Next.js for the first time.
+- Using Next.js for the first time.
+  - Generally it was easy to follow the documentation and the deployment on Vercel was quick and simple to setup.
+  - I planned to use serverless functions using Next.js API Routes to communicate with the domain layer but ran into difficulties and due to time limitations switched to a more familiar express server.
 
-## Deploy on Vercel
+## Next steps
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Build out domain to include reservations table. Allow the user to create and modify bookings.
+- Abstract and tidy the code, especially on the server.
+- Use Stripe to manage the customers' balance and payment details.
+- Adding authentication to the API routes so only the user can access their data (currently the userId is sent in the params so once logged in a user can access anyones balance data.)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Learning and further interests
+
+- Using a new technology for a tech test was a brave choice!
+- I'd like to explore Next.js serverless functions further and get them to work with a database.
