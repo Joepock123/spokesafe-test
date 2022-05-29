@@ -1,31 +1,40 @@
-import Image from "next/image";
-import { UserType } from "../pages/api/user";
-import styles from "../styles/Home.module.css";
+import styled from "styled-components";
+import { UserProfile } from "@auth0/nextjs-auth0";
 
-const ProfileCard = ({ user }: { user?: UserType }) => {
-  const { firstName, lastName, picture, balance } = user || {};
-  console.log("~ picture", picture);
+import Image from "next/image";
+
+const ProfileCard = ({ user }: { user: UserProfile }) => {
+  const { name, picture } = user;
   return (
-    <div className={styles.container}>
-      {!!user ? (
+    <Section>
+      {!!picture ? (
         <>
-          <Image
+          <StyledImage
             priority
             src={picture}
             height={144}
             width={144}
-            alt={`${firstName} ${lastName}`}
+            alt={name ? name : undefined}
           />
-          <p>
-            {firstName} {lastName}
-          </p>
-          <p>Account Balance: £{balance}</p>
+          <p>{name}</p>
+          <p>Account Balance: £0</p>
         </>
       ) : (
         "Loading"
       )}
-    </div>
+    </Section>
   );
 };
+
+const Section = styled.section`
+  width: 450px;
+  padding: 12px;
+  border-radius: 3%;
+  outline: solid 1px #1976d2;
+`;
+
+const StyledImage = styled(Image)`
+  border-radius: 50%;
+`;
 
 export default ProfileCard;

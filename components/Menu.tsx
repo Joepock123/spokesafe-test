@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-
+import { useUser } from "@auth0/nextjs-auth0";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuMui from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
 import Link from "next/link";
 import Button from "./Button";
-import { useUser } from "@auth0/nextjs-auth0";
 
 const Menu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
