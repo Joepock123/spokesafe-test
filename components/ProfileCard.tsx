@@ -3,7 +3,13 @@ import { UserProfile } from "@auth0/nextjs-auth0";
 
 import Image from "next/image";
 
-const ProfileCard = ({ user }: { user: UserProfile }) => {
+const ProfileCard = ({
+  user,
+  balance,
+}: {
+  user: UserProfile;
+  balance?: number;
+}) => {
   const { name, picture } = user;
   return (
     <Section>
@@ -17,7 +23,7 @@ const ProfileCard = ({ user }: { user: UserProfile }) => {
             alt={name ? name : undefined}
           />
           <p>{name}</p>
-          <p>Account Balance: £0</p>
+          <p>Account Balance: £{balance || 0}</p>
         </>
       ) : (
         "Loading"

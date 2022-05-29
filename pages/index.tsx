@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
 import styled from "styled-components";
 
@@ -9,6 +10,19 @@ import ProfileCard from "../components/ProfileCard";
 
 const Home: NextPage = () => {
   const { user, error, isLoading } = useUser();
+  const userId = user?.sub;
+  const [balance, setBalance] = useState();
+
+  useEffect(() => {
+    if (!!userId) {
+      fetch(`https://spokesafe-test.herokuapp.com/users/${userId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("~ data", data);
+          setBalance(data.balance);
+        });
+    }
+  }, [userId]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error?.message}</div>;
@@ -23,7 +37,7 @@ const Home: NextPage = () => {
       <Layout>
         <h1>{user ? "Profile" : "Log in"}</h1>
         {user ? (
-          <ProfileCard user={user} />
+          <ProfileCard user={user} balance={balance} />
         ) : (
           <ButtonWrapper>
             <Button variant="outlined" href="api/auth/login">

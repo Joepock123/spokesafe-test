@@ -1,5 +1,6 @@
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
+import { useRouter } from "next/router";
 import Image from "next/image";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -8,6 +9,18 @@ import Button from "../../components/Button";
 import Layout from "../../components/Layout";
 
 const Booking: NextPage = () => {
+  const router = useRouter();
+  const { user } = useUser();
+
+  const handleCancel = async () => {
+    if (user?.sub) {
+      await fetch(`https://spokesafe-test.herokuapp.com/users/${user?.sub}`, {
+        method: "PUT",
+      });
+      router.push("/");
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -25,9 +38,12 @@ const Booking: NextPage = () => {
             width={144}
             alt="booking-image"
           />
-          <p>Location</p>
-          <p>Date</p>
-          <Button variant="outlined">Cancel</Button>
+          <p>Location: Soho</p>
+          <p>Date: Monday 18th September</p>
+          <p>Spaces: 2</p>
+          <Button variant="outlined" onClick={handleCancel}>
+            Cancel
+          </Button>
         </Section>
       </Layout>
     </div>
